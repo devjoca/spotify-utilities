@@ -1,12 +1,13 @@
 <template>
-  <div>
+
+<div>
     <h1>My Playlists</h1>
-  </div>
-  <div>
+</div>
+<div>
     <ul>
-      <playlist v-for="playlist in playlists" :playlist="playlist"> </playlist>
+        <playlist v-for="playlist in playlists" :playlist="playlist"> </playlist>
     </ul>
-  </div>
+</div>
 
 </template>
 
@@ -16,29 +17,29 @@ import {getPlaylists} from '../services/spotify.js';
 import Playlist from './Playlist.vue';
 
 export default {
-  components: {
-    Playlist
-  },
-  route: {
-    activate() {
-      let auth_info = ipcRenderer.sendSync('authorize-spotify');
+    components: {
+        Playlist
+    },
+    route: {
+        activate() {
+            let auth_info = ipcRenderer.sendSync('authorize-spotify');
 
-      localStorage.setItem('auth_info', auth_info);
+            localStorage.setItem('auth_info', auth_info);
 
-      getPlaylists(auth_info.access_token).then((res) => {
-        this.playlists = res.data.items;
-      })
+            getPlaylists(auth_info.access_token).then((res) => {
+                this.playlists = res.data.items;
+            })
+        }
+    },
+    data() {
+        return {
+            playlists : []
+        }
+    },
+    methods: {
+        randomize(playlist) {
+            console.log(playlist);
+        }
     }
-  },
-  data() {
-    return {
-      playlists : []
-    }
-  },
-  methods: {
-    randomize(playlist) {
-      console.log(playlist);
-    }
-  }
 };
 </script>
