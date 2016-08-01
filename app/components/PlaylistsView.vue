@@ -4,9 +4,7 @@
   </div>
   <div>
     <ul>
-      <li v-for="playlist in playlists">
-        {{ playlist.name }} - Total songs: {{ playlist.tracks.total }}
-       </li>
+      <playlist v-for="playlist in playlists" :playlist="playlist"> </playlist>
     </ul>
   </div>
 
@@ -15,23 +13,31 @@
 <script>
 import {ipcRenderer} from 'electron';
 import {getPlaylists} from '../services/spotify.js';
+import Playlist from './Playlist.vue';
 
 export default {
+  components: {
+    Playlist
+  },
   route: {
     activate() {
-      let auth_info = ipcRenderer.sendSync('authorize-spotify')
-      localStorage.setItem('auth_info', auth_info)
+      let auth_info = ipcRenderer.sendSync('authorize-spotify');
+
+      localStorage.setItem('auth_info', auth_info);
 
       getPlaylists(auth_info.access_token).then((res) => {
-        for (var i = 0;  i < res.data.items.length; i++) {
-          this.playlists.push(res.data.items[i])
-        }
+        this.playlists = res.data.items;
       })
     }
   },
   data() {
     return {
       playlists : []
+    }
+  },
+  methods: {
+    randomize(playlist) {
+      console.log(playlist);
     }
   }
 };
