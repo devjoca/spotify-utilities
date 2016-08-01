@@ -23,11 +23,11 @@ export default {
     route: {
         activate() {
             let auth_info = ipcRenderer.sendSync('authorize-spotify');
-
             localStorage.setItem('access_token', auth_info.access_token);
-
-            getPlaylists().then(res => {
-                this.playlists = res.data.items;
+        },
+        data() {
+            return getPlaylists().then(res => {
+                return { playlists: res.data.items };
             });
         }
     },

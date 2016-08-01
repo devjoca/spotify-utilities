@@ -18,3 +18,7 @@ export function getTracksByUrl(href) {
 
     return http.get(href, null, options);
 }
+
+export function getPlaylistInfo(playlist_id) {
+    console.log(playlist_id);
+}
