@@ -24,9 +24,9 @@ export default {
         activate() {
             let auth_info = ipcRenderer.sendSync('authorize-spotify');
 
-            localStorage.setItem('auth_info', auth_info);
+            localStorage.setItem('access_token', auth_info.access_token);
 
-            getPlaylists(auth_info.access_token).then((res) => {
+            getPlaylists().then((res) => {
                 this.playlists = res.data.items;
             })
         }
