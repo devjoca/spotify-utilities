@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import router from './router.js'
+import Vue from 'vue';
+import router from './router.js';
 import VueResource from 'vue-resource';
 
-Vue.use(VueResource)
+Vue.use(VueResource);
 
-let app = Vue.extend({})
+let app = Vue.extend({});
 
-router.start(app, '#app')
+router.start(app, '#app');

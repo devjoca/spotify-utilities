@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Authorize from './components/authorize.vue'
-import Playlists from './components/playlists.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Authorize from './components/authorize.vue';
+import Playlists from './components/playlists.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-let router = new VueRouter()
+let router = new VueRouter();
 
 router.map({
   '/': {
@@ -14,6 +14,6 @@ router.map({
   '/playlists': {
     component: Playlists
   }
-})
+});
 
-export default router
+export default router;

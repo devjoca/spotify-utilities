@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import {ipcRenderer} from 'electron'
-import {getPlaylists} from '../services/spotify.js'
+import {ipcRenderer} from 'electron';
+import {getPlaylists} from '../services/spotify.js';
 
 export default {
   route: {
@@ -34,5 +34,5 @@ export default {
       playlists : []
     }
   }
-}
+};
 </script>
