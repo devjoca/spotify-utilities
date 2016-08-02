@@ -13,7 +13,7 @@
 
 <script>
 import {ipcRenderer} from 'electron';
-import {getPlaylists} from '../services/spotify.js';
+import {getPlaylists, getMe} from '../services/spotify.js';
 import PlaylistItem from './PlaylistItem.vue';
 
 export default {
@@ -24,10 +24,15 @@ export default {
         activate() {
             let auth_info = ipcRenderer.sendSync('authorize-spotify');
             localStorage.setItem('access_token', auth_info.access_token);
+
+            getMe().then(user => {
+                localStorage.setItem('user_id', user.id);
+            });
+
         },
         data() {
-            return getPlaylists().then(res => {
-                return { playlists: res.data.items };
+            return getPlaylists().then(playlists => {
+                return { playlists: playlists.items };
             });
         }
     },

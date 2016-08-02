@@ -7,18 +7,21 @@ let options = {
     }
 };
 
+export function getMe() {
+    return http.get(spotify_api + '/me', null, options).then(res => res.data);
+}
+
 export function getPlaylists() {
-    let playlists_url = spotify_api + '/me/playlists';
-
-    return http.get(playlists_url, null, options);
-}
-
-export function getTracksByUrl(href) {
-    let access_token = localStorage.getItem('access_token');
-
-    return http.get(href, null, options);
-}
+    return http.get(spotify_api + '/me/playlists', null, options).then(res => res.data);
+};
 
 export function getPlaylistInfo(playlist_id) {
-    console.log(playlist_id);
-}
+    let user_id = localStorage.getItem('user_id');
+    let playslist_url = `${spotify_api}/users/${user_id}/playlists/${playlist_id}`;
+
+    return http.get(playslist_url, null, options).then(res => res.data);
+};
+
+export function getTracksFromUrl(url) {
+    return http.get(url, null, options).then(res => res.data);
+};
